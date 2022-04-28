@@ -1,0 +1,143 @@
+#pragma once
+
+#include <string>
+#include <iostream>
+
+using namespace std;
+
+class Cuenta {
+private:
+	float cantidad;
+	string titular;
+public:
+	Cuenta() {
+		this->cantidad = 0;
+		this->titular = "Sin nombre";
+	}
+
+	Cuenta(float cantidad, string titular) {
+		this->cantidad = cantidad;
+		this->titular = titular;
+	}
+
+	~Cuenta() {}
+
+	float getCantidad() {
+		return this->cantidad;
+	}
+
+	void setCantidad(float cantidad) {
+		this->cantidad = cantidad;
+	}
+
+	string getTitular() {
+		return this->titular;
+	}
+
+	void setTitular(string titular) {
+		this->titular = titular;
+	}
+
+
+	void ingresar(float monto) {
+		if (monto >= 0) {
+			this->cantidad += monto;
+		}
+		else {
+			cout << "El monto ingresado no puede ser menor que 0" << endl;
+		}
+	}
+
+	void retirar(float monto) {
+
+		int opcion;
+		if (monto > this->cantidad) {
+			cout << "El monto ingresado supera la cantidad en la cuenta" << endl;
+			cout << "Usted deseria retirar el monto disponible?: " << this->cantidad;
+			cout << "Ingrese (1) si asi lo desea y (2) sino:";
+			cin >> opcion;
+			if (opcion == 1) {
+				retirarTodo();
+			}
+		}
+		else {
+			this->cantidad -= monto;
+		}
+	}
+
+	void retirarTodo() {
+		cantidad = 0;
+		cout << "Usted ha retirado todo el monto de la cuenta" << endl;
+	}
+
+};
+
+
+
+----------------------------------------------------------------------------------------------
+
+
+#include "pch.h"
+#include "Cuenta.h"
+
+
+using namespace System;
+using namespace std;
+
+
+int main()
+{
+    Cuenta* objCuenta = new Cuenta();
+    string nombre;
+    float cantidad;
+    float montoRetirar, montoDepositar;
+    int opcion;
+
+
+    cout << "Bienvenido al sistema de retiros y depositos del Banco Katherine" << endl;
+    cout << "Ingrese su nombre:";
+    getline(cin, nombre);
+    //aqui hay una invocacion mas para evitar que se llene el flujo de datos
+    cout << "Ingrese el monto inicial con el que apertura su cuenta:";
+    cin >> cantidad;
+
+    objCuenta->setCantidad(cantidad);
+    objCuenta->setTitular(nombre);
+
+    cout << "Bienvenid@ " << objCuenta->getTitular() << " su cantidad inicial es: " << objCuenta->getCantidad();
+
+    do {
+        cout << "Elija una de las opciones:" << endl;
+        cout << "1. Si desea retirar dinero" << endl;
+        cout << "2. Si desea depositar dinero" << endl;
+        cout << "3. Si desea retirar todo el dinero" << endl;
+        cout << "4. Si ya no quiere nada y se aburrio :(" << endl;
+        cout << "Ingrese la opcion:";
+        cin >> opcion;
+
+        switch (opcion)
+        {
+        case 1: cout << "Ingrese el monto que desea retirar:";
+                cin >> montoRetirar;
+                objCuenta->retirar(montoRetirar);
+                cout << "Le queda el siguiente monto en su cuenta: " << objCuenta->getCantidad() << endl;
+                break;
+        case 2: cout << "Ingrese el monto que desea depositar:";
+                cin >> montoDepositar;
+                objCuenta->ingresar(montoDepositar);
+                cout << "Ahora tiene el siguiente monto en su cuenta: " << objCuenta->getCantidad() << endl;
+                break;
+        case 3: objCuenta->retirar(montoRetirar);
+                cout << "Le queda el siguiente monto en su cuenta: " << objCuenta->getCantidad() << endl;
+                break;
+        case 4: exit(0);
+        default:
+            break;
+        }
+
+    } while (1);
+
+
+
+    return 0;
+}

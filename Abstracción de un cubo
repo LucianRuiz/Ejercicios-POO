@@ -1,0 +1,56 @@
+#include "pch.h"
+#include "Cubo.h"
+#include <iostream>
+
+using namespace System;
+using namespace std;
+
+
+int main()
+{
+    Cubo* objCubo1;
+    objCubo1 = new Cubo();
+    objCubo1->setLado(30);
+
+    cout << "El cubo 1 tiene un lado de valor: " << objCubo1->getLado() << endl;
+    cout << "Y tiene un volumen de: " << objCubo1->volumen() << " en metros cubicos" <<endl;
+
+    Cubo* objCubo2 = new Cubo(40);
+
+    cout << "El cubo 2 tiene un lado de valor: " << objCubo2->getLado() << endl;
+    cout << "Y tiene un volumen de: " << objCubo2->volumen() << " en metros cubicos" << endl;
+
+    return 0;
+}
+
+#pragma once
+
+class Cubo
+{
+private:
+	float lado;
+
+public:
+	Cubo() {
+		this->lado = 0;
+	}
+	Cubo(int lado) {
+		this->lado = lado;
+	}
+	~Cubo(){}
+
+	float getLado() {
+		return this->lado;
+	}
+
+	void setLado(float lado) {
+		this->lado = lado;
+	}
+
+	float volumen() {
+		return (lado * lado * lado);
+	}
+
+
+
+};

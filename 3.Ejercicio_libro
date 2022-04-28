@@ -1,0 +1,149 @@
+#pragma once
+
+#include "Autor.h";
+
+//De cada libro se conoce: título, editorial, edición y número de páginas
+class Libro {
+private:
+	string titulo;
+	string editorial;
+	int edicion;
+	int numeroPaginas;
+	Autor* objAutor;
+public:
+	Libro() {
+		this->titulo = "";
+		this->editorial = "";
+		this->edicion = 1;
+		this->numeroPaginas = 1;
+		this->objAutor = NULL;
+	}
+
+	Libro(string titulo, string editorial, int edicion, int numeroPaginas, Autor* autor) {
+		this->titulo = titulo;
+		this->editorial = editorial;
+		this->edicion = edicion;
+		this->numeroPaginas = numeroPaginas;
+		this->objAutor = autor;
+	}
+
+	~Libro(){}
+
+
+	string getTitulo() {
+		return this->titulo;
+	}
+
+	string getEditorial() {
+		return this->editorial;
+	}
+
+	int getEdicion() {
+		return this->edicion;
+	}
+
+	int getNumeroPaginas() {
+		return this->numeroPaginas;
+	}
+
+	Autor* getAutor() {
+		return this->objAutor;
+	}
+
+	void setTitulo(string titulo) {
+		this->titulo = titulo;
+	}
+
+	void setEditorial(string editorial) {
+		this->editorial = editorial;
+	}
+
+	void setEdicion(int edicion) {
+		this->edicion = edicion;
+	}
+
+	void setNumeroPaginas(int numero) {
+		this->numeroPaginas = numero;
+	}
+
+	void setAutor(Autor* autor) {
+		this->objAutor = auto	r;
+	}
+
+};
+
+
+-----------------------------------------------------------------------------------------------------------------------
+
+	#pragma once
+
+#include <string>
+using namespace std;
+//De los autores se conoce: su nombre, apellido y país de procedencia.
+
+class Autor {
+private:
+	string nombre;
+	string apellido;
+	string pais;
+
+public:
+	Autor() {
+		this->nombre = "";
+		this->apellido = "";
+		this->pais = "";
+	}
+
+	Autor(string nombre, string apellido, string pais) {
+		this->nombre = nombre;
+		this->apellido = apellido;
+		this->pais = pais;
+	}
+
+	~Autor() {}
+
+	string getNombre() {
+		return this->nombre;
+	}
+
+	string getApellido() {
+		return this->apellido;
+	}
+
+	string getPais() {
+		return this->pais;
+	}
+
+
+	void setNombre(string nombre) {
+		this->nombre = nombre;
+	}
+
+	void setApellido(string apellido) {
+		this->nombre = apellido;
+	}
+
+	void setPais(string pais) {
+		this->nombre = pais;
+	}
+
+};
+
+-----------------------------------------------------------------------------------------------------------------------
+
+#include "pch.h"
+
+#include "Libro.h"
+
+
+
+using namespace System;
+
+int main()
+{
+    Autor* objAutor = new Autor("Javier", "Rosales", "Peru");
+    Libro* objLibro = new Libro("Como pasar Progra 2 en 1,030,502 pasos", "Hachiko", 1, 900, objAutor);
+
+
+    return 0;
+}
